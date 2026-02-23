@@ -1,0 +1,13 @@
+*.class
+*.jar
+*.log
+*.tmp
+timestamp
+desktop.ini
+sources.txt
+.vscode/
+build/
+dist/
+*.iso
+*.msi
+*.exe
