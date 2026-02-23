@@ -756,6 +756,10 @@ public final class VncViewer implements Runnable, OptionsDialogCallback {
     options.showDialog();
   }
 
+  void showDeviceDiscovery() {
+    com.turbovnc.vncviewer.network.DeviceDiscoveryDialog.showDialog((Frame)null);
+  }
+
   public void setTightOptions() {
     options.setTightOptions(params.encoding.get());
   }

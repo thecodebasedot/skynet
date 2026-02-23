@@ -35,6 +35,7 @@ public final class TrayMenu extends PopupMenu implements ActionListener {
     if (!viewer.getParams().noNewConn.get()) {
       newConn = addMenuItem("New connection...");
     }
+    deviceDiscovery = addMenuItem("Device Discovery...");
     options = addMenuItem("Default options...");
     addSeparator();
     about = addMenuItem("About SkyNet Viewer...");
@@ -105,6 +106,8 @@ public final class TrayMenu extends PopupMenu implements ActionListener {
   public void actionPerformed(ActionEvent ev) {
     if (!viewer.getParams().noNewConn.get() && actionMatch(ev, newConn)) {
       VncViewer.newViewer(viewer);
+    } else if (actionMatch(ev, deviceDiscovery)) {
+      viewer.showDeviceDiscovery();
     } else if (actionMatch(ev, options)) {
       viewer.showOptions();
     } else if (actionMatch(ev, about)) {
@@ -119,7 +122,7 @@ public final class TrayMenu extends PopupMenu implements ActionListener {
     }
   }
 
-  MenuItem newConn, options, about, exit;
+  MenuItem newConn, deviceDiscovery, options, about, exit;
   TrayIcon trayIcon;
   SystemTray tray;
   VncViewer viewer;

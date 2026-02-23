@@ -125,28 +125,34 @@ class ServerDialog extends Dialog implements ActionListener {
 
     optionsButton = new JButton("Options...");
     aboutButton = new JButton("About...");
+    deviceDiscoveryButton = new JButton("Discover Devices...");
     okButton = new JButton("Connect");
     updateButtons();
     cancelButton = new JButton("Cancel");
     buttonPanel = new JPanel(new GridBagLayout());
-    buttonPanel.setPreferredSize(new Dimension(350, 40));
+    buttonPanel.setPreferredSize(new Dimension(450, 40));
     Dialog.addGBComponent(aboutButton, buttonPanel,
                           0, 3, 1, 1, 0, 0, 0.8, 1,
                           GridBagConstraints.HORIZONTAL,
                           GridBagConstraints.CENTER,
                           new Insets(0, 2, 0, 5));
+    Dialog.addGBComponent(deviceDiscoveryButton, buttonPanel,
+                          1, 3, 1, 1, 0, 0, 0.8, 1,
+                          GridBagConstraints.HORIZONTAL,
+                          GridBagConstraints.CENTER,
+                          new Insets(0, 2, 0, 5));
     Dialog.addGBComponent(optionsButton, buttonPanel,
-                          1, 3, 1, 1, 0, 0, 1, 1,
+                          2, 3, 1, 1, 0, 0, 1, 1,
                           GridBagConstraints.HORIZONTAL,
                           GridBagConstraints.CENTER,
                           new Insets(0, 2, 0, 5));
     Dialog.addGBComponent(okButton, buttonPanel,
-                          2, 3, 1, 1, 0, 0, 0.7, 1,
+                          3, 3, 1, 1, 0, 0, 0.7, 1,
                           GridBagConstraints.HORIZONTAL,
                           GridBagConstraints.CENTER,
                           new Insets(0, 2, 0, 5));
     Dialog.addGBComponent(cancelButton, buttonPanel,
-                          3, 3, 1, 1, 0, 0, 0.6, 1,
+                          4, 3, 1, 1, 0, 0, 0.6, 1,
                           GridBagConstraints.HORIZONTAL,
                           GridBagConstraints.CENTER,
                           new Insets(0, 2, 0, 5));
@@ -155,6 +161,7 @@ class ServerDialog extends Dialog implements ActionListener {
     trashButton.addActionListener(this);
     optionsButton.addActionListener(this);
     aboutButton.addActionListener(this);
+    deviceDiscoveryButton.addActionListener(this);
     okButton.addActionListener(this);
     cancelButton.addActionListener(this);
   }
@@ -228,6 +235,8 @@ class ServerDialog extends Dialog implements ActionListener {
       }
     } else if (s instanceof JButton && (JButton)s == aboutButton) {
       VncViewer.showAbout(getJDialog());
+    } else if (s instanceof JButton && (JButton)s == deviceDiscoveryButton) {
+      com.turbovnc.vncviewer.network.DeviceDiscoveryDialog.showDialog(getJDialog());
     } else if (s instanceof JComboBox && (JComboBox)s == server) {
       if (e.getActionCommand().equals("comboBoxEdited") ||
           e.getActionCommand().equals("comboBoxChanged"))
@@ -273,7 +282,7 @@ class ServerDialog extends Dialog implements ActionListener {
   JComboBox server;
   ComboBoxEditor editor;
   JPanel topPanel, buttonPanel;
-  JButton aboutButton, optionsButton, okButton, cancelButton, trashButton;
+  JButton aboutButton, deviceDiscoveryButton, optionsButton, okButton, cancelButton, trashButton;
   OptionsDialog options;
 
   static LogWriter vlog = new LogWriter("ServerDialog");
